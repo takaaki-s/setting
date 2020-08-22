@@ -4,7 +4,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tomasr/molokai'
@@ -98,3 +98,19 @@ nmap <C-m> <Plug>AirlineSelectNextTab
 nmap <silent> <Esc><Esc> :<C-u>noh<CR><Esc>
 nmap <silent> <C-o> :NERDTreeToggle<CR>
 tnoremap <silent> <ESC> <C-\><C-n>
+
+" FZF
+fun! FzfOmniFiles()
+  let is_git = system('git status')
+  if v:shell_error
+    :Files
+  else
+    :GitFiles
+  endif
+endfun
+
+nnoremap <C-b> :Buffers<CR>
+nnoremap <C-g> :Rg<Space>
+nnoremap <leader><leader> :Commands<CR>
+nnoremap <C-p> :call FzfOmniFiles()<CR>
+
